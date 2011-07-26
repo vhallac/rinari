@@ -305,11 +305,11 @@ from your conf/database.sql file."
 	       (server (or (cdr (assoc "host" database-alist)) "localhost"))
 	       (port (cdr (assoc "port" database-alist)))
 	       (sql-server (if port (concat server ":" port) server)))
-	  (cond ((string-match "mysql" adapter) 
+	  (cond ((string-match "mysql" adapter)
 		 (setf adapter "mysql"))
-                ((string-match "sqlite" adapter) 
+                ((string-match "sqlite" adapter)
 		 (setf adapter "sqlite"))
-		((string-match "postgresql" adapter) 
+		((string-match "postgresql" adapter)
 		 (setf adapter "postgres")))
 	  (eval (list (intern (concat "sql-" adapter))))
 	  (rename-buffer (sql-name environment)) (rinari-launch))))))
@@ -699,9 +699,9 @@ behavior."
 	   (specs (third type))
 	   (make (fourth type)))
        (eval `(defjump
-		(quote ,(read (format "rinari-find-%S" name)))
-		(quote ,specs)
-		'rinari-root
+		,(read (format "rinari-find-%S" name))
+		,specs
+		rinari-root
 		,(format "Go to the most logical %S given the current location" name)
 		,(if make `(quote ,make))
 		'ruby-add-log-current-method))))
